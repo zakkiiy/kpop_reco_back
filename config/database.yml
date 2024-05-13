@@ -84,6 +84,6 @@ test:
 #
 production:
   <<: *default
-  database: app_production
-  username: app
-  password: <%= ENV["APP_DATABASE_PASSWORD"] %>
+  database: kpop_reco_back
+  username: kpop_reco_back_user
+  url: <%= ENV['DATABASE_URL'] %>
