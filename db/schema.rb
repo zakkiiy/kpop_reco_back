@@ -10,9 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_05_19_030520) do
+ActiveRecord::Schema[7.0].define(version: 2024_05_21_125439) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "artists", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "channel_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["channel_id"], name: "index_artists_on_channel_id", unique: true
+    t.index ["name"], name: "index_artists_on_name", unique: true
+  end
+
+  create_table "kpop_videos", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "video_id", null: false
+    t.string "image", null: false
+    t.bigint "view_count", null: false
+    t.datetime "posted_at", null: false
+    t.bigint "artist_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["artist_id"], name: "index_kpop_videos_on_artist_id"
+    t.index ["video_id"], name: "index_kpop_videos_on_video_id", unique: true
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "provider", null: false
@@ -24,4 +46,5 @@ ActiveRecord::Schema[7.0].define(version: 2024_05_19_030520) do
     t.index ["provider", "uid"], name: "index_users_on_provider_and_uid", unique: true
   end
 
+  add_foreign_key "kpop_videos", "artists"
 end
