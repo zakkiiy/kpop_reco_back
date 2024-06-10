@@ -4,6 +4,11 @@ class Api::V1::KpopVideosController < ApplicationController
     render json: kpop_videos.as_json(include: { artist: { only: [:name] } })
   end
 
+  def show
+    kpop_video = KpopVideo.find(params[:id])
+    render json: kpop_video.as_json(include: { artist: { only: [:name] } })
+  end
+
   def create_videos
     service = Google::Apis::YoutubeV3::YouTubeService.new
     service.key = ENV['YOUTUBE_API_KEY']
