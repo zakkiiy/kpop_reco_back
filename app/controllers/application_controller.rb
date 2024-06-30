@@ -16,11 +16,11 @@ class ApplicationController < ActionController::API
       # セッションからユーザー情報を取得
       @current_user = User.find_by(id: session[:user_id])
     else
-      # GitHub APIからユーザー情報を取得
+      # Google APIからユーザー情報を取得
       session.delete(:access_token)
       user_info = fetch_user_info_from_google(received_access_token)
 
-      # GitHubのuidをもとにユーザー検索
+      # Googleのsubをもとにユーザー検索
       @current_user = User.find_by(uid: user_info['sub'])
 
       # セッションにユーザー情報を保存
@@ -37,14 +37,7 @@ class ApplicationController < ActionController::API
 
     response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: uri.scheme == "https") do |http|
       http.request(request)
-      
     end
-    p "ああああ"
-    p response
-
       JSON.parse(response.body)
-
-
-
   end
 end
