@@ -1,6 +1,11 @@
 class Api::V1::FavoritesController < ApplicationController
   before_action :set_current_user
 
+  def index
+    favorites = @current_user.kpop_videos.includes(:artist)
+    render json: favorites.as_json(include: { artist: { only: [:name] } })
+  end
+
   def create
     begin
       video = KpopVideo.find(params[:video_id])

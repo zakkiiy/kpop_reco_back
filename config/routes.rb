@@ -11,6 +11,7 @@ Rails.application.routes.draw do
           get 'check', to: 'favorites#check'
         end
       end
+      resources :favorites, only: [:index]
     end
   end
 end
