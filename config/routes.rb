@@ -6,9 +6,11 @@ Rails.application.routes.draw do
       get 'youtube_video_api_tests/latest', to: 'youtube_video_api_tests#latest_videos'
       post 'kpop_videos/create_videos', to: 'kpop_videos#create_videos' 
       resources :videos, only: [] do
-        resources :favorites, only: [:create, :destroy]
+        resource :favorite, only: [:create, :destroy]
+        member do
+          get 'check', to: 'favorites#check'
+        end
       end
-      #resources :favorites, only: [:index, :create]
     end
   end
 end

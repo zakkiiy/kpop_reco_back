@@ -9,7 +9,9 @@ class ApplicationController < ActionController::API
   private
 
   def set_current_user
+    p request.headers["Authorization"]
     received_access_token = request.headers["Authorization"].split.last
+    puts "Received Access Token: #{received_access_token}"
 
     if session[:user_id] && session[:access_token] == received_access_token
 
