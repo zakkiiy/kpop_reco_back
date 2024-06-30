@@ -5,6 +5,10 @@ Rails.application.routes.draw do
       resources :kpop_videos
       get 'youtube_video_api_tests/latest', to: 'youtube_video_api_tests#latest_videos'
       post 'kpop_videos/create_videos', to: 'kpop_videos#create_videos' 
+      resources :videos, only: [] do
+        resources :favorites, only: [:create, :destroy]
+      end
+      #resources :favorites, only: [:index, :create]
     end
   end
 end

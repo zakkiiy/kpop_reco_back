@@ -1,3 +1,4 @@
+require 'google/apis/youtube_v3'
 class Api::V1::KpopVideosController < ApplicationController
   def index
     kpop_videos = KpopVideo.where(video_type: :normal).includes(:artist)
@@ -21,7 +22,7 @@ class Api::V1::KpopVideosController < ApplicationController
 
     channel_ids.each do |channel_id|
       begin
-        response = service.list_searches('snippet', channel_id: channel_id, order: 'date', type: 'video', max_results: 10)
+        response = service.list_searches('snippet', channel_id: channel_id, order: 'date', type: 'video', max_results: 30)
 
         # File.open("response_#{channel_id}.json", "w") do |file|
         #   file.write(JSON.pretty_generate(response.to_h))
