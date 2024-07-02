@@ -1,6 +1,11 @@
 class Api::V1::PlaylistsController < ApplicationController
   before_action :set_current_user
 
+  def index
+    playlists = @current_user.playlists
+    render json: playlists
+  end
+
   def create
     playlist = @current_user.playlists.new(playlist_params)
 
