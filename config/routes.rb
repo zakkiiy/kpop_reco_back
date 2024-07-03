@@ -12,7 +12,7 @@ Rails.application.routes.draw do
         end
       end
       resources :favorites, only: [:index]
-      resources :playlists, only: [:index, :create]
+      resources :playlists, only: [:index, :create, :destroy]
     end
   end
 end
