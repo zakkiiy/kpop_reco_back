@@ -16,6 +16,15 @@ class Api::V1::PlaylistsController < ApplicationController
     end
   end
 
+  def destroy
+    playlist = @current_user.playlists.find(params[:id])
+    if playlist.destroy
+      render json: { message: 'Playlist successfully deleted' }, status: :ok
+    else
+      render json: { error: 'Failed to delete playlist' }, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def playlist_params
