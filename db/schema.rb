@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_06_30_132510) do
+ActiveRecord::Schema[7.0].define(version: 2024_07_03_150920) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -47,6 +47,17 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_30_132510) do
     t.index ["video_id"], name: "index_kpop_videos_on_video_id", unique: true
   end
 
+  create_table "playlist_items", force: :cascade do |t|
+    t.bigint "playlist_id", null: false
+    t.bigint "kpop_video_id", null: false
+    t.integer "position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["kpop_video_id"], name: "index_playlist_items_on_kpop_video_id"
+    t.index ["playlist_id", "kpop_video_id"], name: "index_playlist_items_on_playlist_id_and_kpop_video_id", unique: true
+    t.index ["playlist_id"], name: "index_playlist_items_on_playlist_id"
+  end
+
   create_table "playlists", force: :cascade do |t|
     t.string "name", null: false
     t.bigint "user_id", null: false
@@ -68,5 +79,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_30_132510) do
   add_foreign_key "favorites", "kpop_videos"
   add_foreign_key "favorites", "users"
   add_foreign_key "kpop_videos", "artists"
+  add_foreign_key "playlist_items", "kpop_videos"
+  add_foreign_key "playlist_items", "playlists"
   add_foreign_key "playlists", "users"
 end
