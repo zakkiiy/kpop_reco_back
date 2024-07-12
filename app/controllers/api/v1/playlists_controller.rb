@@ -25,6 +25,18 @@ class Api::V1::PlaylistsController < ApplicationController
     end
   end
 
+  def check_video
+    video_id = params[:video_id]
+    playlists = @current_user.playlists
+    playlist_states = playlists.map do |playlist|
+      {
+        playlist_id: playlist.id,
+        included: playlist.playlist_items.exists?(kpop_video_id: video_id)
+      }
+    end
+    render json: playlist_states, status: :ok
+  end
+
   private
 
   def playlist_params

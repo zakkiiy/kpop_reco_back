@@ -14,7 +14,8 @@ Rails.application.routes.draw do
       resources :favorites, only: [:index]
       resources :playlists, only: [:index, :create, :destroy] do
         resources :playlist_items, only: [:index, :create, :destroy]
-      end      
+      end
+      get 'playlists/check_video', to: 'playlists#check_video'
     end
   end
 end
