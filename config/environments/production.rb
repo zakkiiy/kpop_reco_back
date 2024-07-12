@@ -83,5 +83,5 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
-  config.hosts << "kpop_reco_back_0ope.onrender.com"
+  config.hosts << "kpop-reco-back.onrender.com"
 end
