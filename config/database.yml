@@ -84,6 +84,6 @@ test:
 #
 production:
   <<: *default
-  database: kpop_reco_back
-  username: kpop_reco_back_user
+  database: kpop_reco_back_0ope
+  username: kpop_reco_back_0ope_user
   url: <%= ENV['DATABASE_URL'] %>
