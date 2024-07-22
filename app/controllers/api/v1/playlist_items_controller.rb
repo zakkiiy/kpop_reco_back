@@ -4,6 +4,8 @@ class Api::V1::PlaylistItemsController < ApplicationController
 
   def index
     playlist_items = @playlist.playlist_items.includes(:kpop_video)
+    p "あいてむ"
+    p playlist_items
     render json: {
       playlist_id: @playlist.id,
       playlist_name: @playlist.name,
@@ -34,6 +36,7 @@ class Api::V1::PlaylistItemsController < ApplicationController
   private
 
   def set_playlist
+    p params
     @playlist = @current_user.playlists.find(params[:playlist_id])
   end
 end
